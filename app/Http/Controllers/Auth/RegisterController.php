@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
-use Validator;
-use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Http\Controllers\BaseController;
+use App\Http\Requests\Auth\RegisterRequest;
+use App\Models\User;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
-class RegisterController extends Controller
+/**
+ * @resource Register
+ */
+class RegisterController extends BaseController
 {
     /*
     |--------------------------------------------------------------------------
@@ -19,53 +22,30 @@ class RegisterController extends Controller
     | provide this functionality without requiring any additional code.
     |
     */
-
-    use RegistersUsers;
-
-    /**
-     * Where to redirect users after login / registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('guest');
     }
 
     /**
-     * Get a validator for an incoming registration request.
+     * register
      *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     * register new user
+     *
+     * @param \Dingo\Api\Http\Request $request
+     *
+     * @return \Dingo\Api\Http\Response\Factory
      */
-    protected function validator(array $data)
+    public function register(RegisterRequest $request)
     {
-        return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
+        $user = User::create([
+            'name' => $request->get('email'),
+            'email' => $request->get('email'),
+            'password' => bcrypt($request->get('password')),
         ]);
-    }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        $token = JWTAuth::fromUser($user);
+
+        return $this->response->array(compact('token'));
     }
 }
