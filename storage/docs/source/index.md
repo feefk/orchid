@@ -111,20 +111,18 @@ null
 `HEAD /api/page/item/{id}`
 
 
-#User
-## list
+#Register
+## register
 
-list all users
+register new user
 
 > Example request:
 
 ```bash
-curl "http://laravel.dev//api/user/list" \
+curl "http://laravel.dev//api/auth/register" \
 -H "Accept: application/json" \
-    -d "size"="1861433712" \
-    -d "page"="1861433712" \
-    -d "sort"="asc" \
-    -d "end_time"="2010-12-15" \
+    -d "email"="tmohr@example.net" \
+    -d "password"="illum" \
 
 ```
 
@@ -132,13 +130,61 @@ curl "http://laravel.dev//api/user/list" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://laravel.dev//api/user/list",
+    "url": "http://laravel.dev//api/auth/register",
+    "method": "POST",
+    "data": {
+        "email": "tmohr@example.net",
+        "password": "illum"
+},
+        "headers": {
+    "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+console.log(response);
+});
+```
+
+
+### HTTP Request
+`POST /api/auth/register`
+
+#### Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    email | email |  required  | Maximum: `255`
+    password | string |  required  | Minimum: `6`
+
+#User
+## all
+
+list all users
+
+> Example request:
+
+```bash
+curl "http://laravel.dev//api/user/all" \
+-H "Accept: application/json" \
+    -d "size"="1206263286" \
+    -d "page"="1206263286" \
+    -d "sort"="asc" \
+    -d "end_time"="1996-07-30" \
+
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://laravel.dev//api/user/all",
     "method": "GET",
     "data": {
-        "size": 1861433712,
-        "page": 1861433712,
+        "size": 1206263286,
+        "page": 1206263286,
         "sort": "asc",
-        "end_time": "2010-12-15"
+        "end_time": "1996-07-30"
 },
         "headers": {
     "accept": "application/json"
@@ -157,9 +203,9 @@ null
 ```
 
 ### HTTP Request
-`GET /api/user/list`
+`GET /api/user/all`
 
-`HEAD /api/user/list`
+`HEAD /api/user/all`
 
 #### Parameters
 
@@ -172,7 +218,7 @@ Parameter | Type | Status | Description
 
 ## me
 
-get me infomation
+get me information
 
 > Example request:
 
