@@ -3,32 +3,17 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\BaseController;
+use App\Http\Requests\Client\UserModifyAvatarRequest;
 use App\Http\Transformers\UserTransformer;
-use App\Models\User;
 
-use App\Http\Requests\PageDataRequest;
 use Dingo\Api\Http\Request;
+use Dingo\Api\Http\Response;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * @resource User
  */
 class UserController extends BaseController {
-
-    /**
-     * all
-     *
-     * list all users
-     *
-     * @param \Dingo\Api\Http\Request $request
-     *
-     * @return \Dingo\Api\Http\Response\Factory
-     */
-    public function all(PageDataRequest $request) {
-        $size = $request->get('size');
-        $users = User::all();
-
-        return $this->response->collection($users, new UserTransformer());
-    }
 
     /**
      * me
@@ -46,6 +31,22 @@ class UserController extends BaseController {
         $user = \JWTAuth::parseToken()->toUser();
 
         return $this->response->item($user, new UserTransformer());
+    }
+
+    public function modifyAvatar(UserModifyAvatarRequest $request) {
+        $file = $request->file('avatar');
+
+        // TODO:
+        // 保存或上传功能应该移动到ReourceController到upload方法中
+        $ext = $file->getClientOriginalExtension();
+        $name = str_random(32).'.'.$ext;
+        $path = $request->file('avatar')->storeAs(
+            'avatars', $name
+        );
+        return $this->response->array([
+            'name' => $name,
+            'type' => 'avatar'
+        ]);
     }
 
 }

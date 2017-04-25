@@ -29,14 +29,20 @@ $api->version('v1', function ($api) {
         $api->post('auth/register', 'RegisterController@register');
     });
 
+    $api->group(['namespace' => 'App\Http\Controllers\Common'], function ($api) {
+        $api->get('resource/{name}', 'ResourceController@download');
+    });
+
     $api->group(['namespace' => 'App\Http\Controllers\Client'], function ($api) {
         $api->group([ 'middleware' => ['jwt.auth']], function ($api) {
-            $api->get('user/all', 'UserController@all');
             $api->get('user/me', 'UserController@me');
+
+            $api->post('user/modify-avatar', 'UserController@modifyAvatar');
 
 
             $api->get('page/item/{id}', 'PageController@Item');
         });
     });
+
 
 });
