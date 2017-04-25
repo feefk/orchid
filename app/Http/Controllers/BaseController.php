@@ -6,6 +6,7 @@ use Dingo\Api\Routing\Helpers;
 use League\Fractal\Manager as FractalManager;
 use League\Fractal\Resource\Collection;
 use League\Fractal\Resource\Item;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class BaseController extends Controller
 {
@@ -25,5 +26,9 @@ class BaseController extends Controller
 
     public function createPaginateData($data = null, $transformer = null){
         return $this->response->collection($data, $transformer);
+    }
+
+    public function user() {
+         return \JWTAuth::parseToken()->toUser();
     }
 }

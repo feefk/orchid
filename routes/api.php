@@ -38,9 +38,16 @@ $api->version('v1', function ($api) {
             $api->get('user/me', 'UserController@me');
 
             $api->post('user/modify-avatar', 'UserController@modifyAvatar');
+        });
+    });
 
-
-            $api->get('page/item/{id}', 'PageController@Item');
+    $api->group(['namespace' => 'App\Http\Controllers\Client'], function ($api) {
+        $api->group([ 'middleware' => ['jwt.auth']], function ($api) {
+            $api->get('page/all', 'PageController@all');
+            $api->post('page/create', 'PageController@create');
+            $api->get('page/item/{id}', 'PageController@item');
+            $api->post('page/update/{id}', 'PageController@update');
+            $api->post('page/delete/{id}', 'PageController@delete');
         });
     });
 

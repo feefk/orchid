@@ -7,8 +7,6 @@ use App\Http\Requests\Client\UserModifyAvatarRequest;
 use App\Http\Transformers\UserTransformer;
 
 use Dingo\Api\Http\Request;
-use Dingo\Api\Http\Response;
-use Illuminate\Support\Facades\Storage;
 
 /**
  * @resource User

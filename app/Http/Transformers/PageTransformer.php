@@ -16,6 +16,7 @@ class PageTransformer extends TransformerAbstract
             'id' => $page->id,
             'title' => $page->title,
             'body' => $page->body,
+            'keywords' => $page->meta_keywords,
         ];
     }
 
