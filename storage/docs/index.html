@@ -106,8 +106,89 @@ console.log(response);
 </tbody>
 </table>
 <h1>Page</h1>
+<h2>all</h2>
+<p>get all</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://laravel.dev//api/page/all" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://laravel.dev//api/page/all",
+    "method": "GET",
+        "headers": {
+    "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+console.log(response);
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">null</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET /api/page/all</code></p>
+<p><code>HEAD /api/page/all</code></p>
+<h2>create</h2>
+<p>create one page</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://laravel.dev//api/page/create" \
+-H "Accept: application/json" \
+    -d "title"="vel" \
+    -d "content"="8114" \
+</code></pre>
+<pre><code class="language-javascript">var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://laravel.dev//api/page/create",
+    "method": "POST",
+    "data": {
+        "title": "vel",
+        "content": 8114
+},
+        "headers": {
+    "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+console.log(response);
+});</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST /api/page/create</code></p>
+<h4>Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>title</td>
+<td>string</td>
+<td>required</td>
+<td>Between: <code>1</code> and <code>50</code></td>
+</tr>
+<tr>
+<td>content</td>
+<td>string</td>
+<td>required</td>
+<td>Between: <code>1</code> and <code>10000</code></td>
+</tr>
+</tbody>
+</table>
 <h2>item</h2>
-<p>get post detail</p>
+<p>get Page detail</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
@@ -133,6 +214,82 @@ console.log(response);
 <h3>HTTP Request</h3>
 <p><code>GET /api/page/item/{id}</code></p>
 <p><code>HEAD /api/page/item/{id}</code></p>
+<h2>update</h2>
+<p>update Page detail</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://laravel.dev//api/page/update/{id}" \
+-H "Accept: application/json" \
+    -d "title"="nobis" \
+    -d "content"="6852" \
+</code></pre>
+<pre><code class="language-javascript">var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://laravel.dev//api/page/update/{id}",
+    "method": "POST",
+    "data": {
+        "title": "nobis",
+        "content": 6852
+},
+        "headers": {
+    "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+console.log(response);
+});</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST /api/page/update/{id}</code></p>
+<h4>Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>title</td>
+<td>string</td>
+<td>required</td>
+<td>Between: <code>1</code> and <code>50</code></td>
+</tr>
+<tr>
+<td>content</td>
+<td>string</td>
+<td>required</td>
+<td>Between: <code>1</code> and <code>10000</code></td>
+</tr>
+</tbody>
+</table>
+<h2>delete</h2>
+<p>delete page</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://laravel.dev//api/page/delete/{id}" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://laravel.dev//api/page/delete/{id}",
+    "method": "POST",
+        "headers": {
+    "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+console.log(response);
+});</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST /api/page/delete/{id}</code></p>
 <h1>Register</h1>
 <h2>register</h2>
 <p>register new user</p>
@@ -188,30 +345,19 @@ console.log(response);
 </tr>
 </tbody>
 </table>
-<h1>User</h1>
-<h2>all</h2>
-<p>list all users</p>
+<h1>Resource</h1>
+<h2>download</h2>
+<p>获取文件</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl "http://laravel.dev//api/user/all" \
--H "Accept: application/json" \
-    -d "size"="1206263286" \
-    -d "page"="1206263286" \
-    -d "sort"="asc" \
-    -d "end_time"="1996-07-30" \
-</code></pre>
+<pre><code class="language-bash">curl "http://laravel.dev//api/resource/{name}" \
+-H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://laravel.dev//api/user/all",
+    "url": "http://laravel.dev//api/resource/{name}",
     "method": "GET",
-    "data": {
-        "size": 1206263286,
-        "page": 1206263286,
-        "sort": "asc",
-        "end_time": "1996-07-30"
-},
         "headers": {
     "accept": "application/json"
     }
@@ -225,44 +371,9 @@ console.log(response);
 </blockquote>
 <pre><code class="language-json">null</code></pre>
 <h3>HTTP Request</h3>
-<p><code>GET /api/user/all</code></p>
-<p><code>HEAD /api/user/all</code></p>
-<h4>Parameters</h4>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Status</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>size</td>
-<td>integer</td>
-<td>required</td>
-<td>Minimum: <code>1</code></td>
-</tr>
-<tr>
-<td>page</td>
-<td>integer</td>
-<td>required</td>
-<td>Minimum: <code>1</code></td>
-</tr>
-<tr>
-<td>sort</td>
-<td>string</td>
-<td>required</td>
-<td><code>desc</code> or <code>asc</code></td>
-</tr>
-<tr>
-<td>end_time</td>
-<td>date</td>
-<td>optional</td>
-</tr>
-</tbody>
-</table>
+<p><code>GET /api/resource/{name}</code></p>
+<p><code>HEAD /api/resource/{name}</code></p>
+<h1>User</h1>
 <h2>me</h2>
 <p>get me information</p>
 <blockquote>
@@ -289,7 +400,52 @@ console.log(response);
 <pre><code class="language-json">null</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET /api/user/me</code></p>
-<p><code>HEAD /api/user/me</code></p><h1>Errors</h1>
+<p><code>HEAD /api/user/me</code></p>
+<h2>/api/user/modify-avatar</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://laravel.dev//api/user/modify-avatar" \
+-H "Accept: application/json" \
+    -d "avatar"="porro" \
+</code></pre>
+<pre><code class="language-javascript">var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://laravel.dev//api/user/modify-avatar",
+    "method": "POST",
+    "data": {
+        "avatar": "porro"
+},
+        "headers": {
+    "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+console.log(response);
+});</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST /api/user/modify-avatar</code></p>
+<h4>Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>avatar</td>
+<td>image</td>
+<td>required</td>
+<td>Must be an image (jpeg, png, bmp, gif, or svg)</td>
+</tr>
+</tbody>
+</table><h1>Errors</h1>
 <aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Whiteboard allows you to optionally separate out your docs into many files...just save them to the `includes` folder and add them to the top of your `index.md`'s frontmatter. Files are included in the order listed.</aside>
 <p>The Feefk API uses the following error codes:</p>
 <table>

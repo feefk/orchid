@@ -72,9 +72,93 @@ Parameter | Type | Status | Description
     password | string |  required  | Minimum: `6`
 
 #Page
+## all
+
+get all
+
+> Example request:
+
+```bash
+curl "http://laravel.dev//api/page/all" \
+-H "Accept: application/json"
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://laravel.dev//api/page/all",
+    "method": "GET",
+        "headers": {
+    "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+console.log(response);
+});
+```
+
+> Example response:
+
+```json
+null
+```
+
+### HTTP Request
+`GET /api/page/all`
+
+`HEAD /api/page/all`
+
+
+## create
+
+create one page
+
+> Example request:
+
+```bash
+curl "http://laravel.dev//api/page/create" \
+-H "Accept: application/json" \
+    -d "title"="vel" \
+    -d "content"="8114" \
+
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://laravel.dev//api/page/create",
+    "method": "POST",
+    "data": {
+        "title": "vel",
+        "content": 8114
+},
+        "headers": {
+    "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+console.log(response);
+});
+```
+
+
+### HTTP Request
+`POST /api/page/create`
+
+#### Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    title | string |  required  | Between: `1` and `50`
+    content | string |  required  | Between: `1` and `10000`
+
 ## item
 
-get post detail
+get Page detail
 
 > Example request:
 
@@ -109,6 +193,83 @@ null
 `GET /api/page/item/{id}`
 
 `HEAD /api/page/item/{id}`
+
+
+## update
+
+update Page detail
+
+> Example request:
+
+```bash
+curl "http://laravel.dev//api/page/update/{id}" \
+-H "Accept: application/json" \
+    -d "title"="nobis" \
+    -d "content"="6852" \
+
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://laravel.dev//api/page/update/{id}",
+    "method": "POST",
+    "data": {
+        "title": "nobis",
+        "content": 6852
+},
+        "headers": {
+    "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+console.log(response);
+});
+```
+
+
+### HTTP Request
+`POST /api/page/update/{id}`
+
+#### Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    title | string |  required  | Between: `1` and `50`
+    content | string |  required  | Between: `1` and `10000`
+
+## delete
+
+delete page
+
+> Example request:
+
+```bash
+curl "http://laravel.dev//api/page/delete/{id}" \
+-H "Accept: application/json"
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://laravel.dev//api/page/delete/{id}",
+    "method": "POST",
+        "headers": {
+    "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+console.log(response);
+});
+```
+
+
+### HTTP Request
+`POST /api/page/delete/{id}`
 
 
 #Register
@@ -157,35 +318,24 @@ Parameter | Type | Status | Description
     email | email |  required  | Maximum: `255`
     password | string |  required  | Minimum: `6`
 
-#User
-## all
+#Resource
+## download
 
-list all users
+获取文件
 
 > Example request:
 
 ```bash
-curl "http://laravel.dev//api/user/all" \
--H "Accept: application/json" \
-    -d "size"="1206263286" \
-    -d "page"="1206263286" \
-    -d "sort"="asc" \
-    -d "end_time"="1996-07-30" \
-
+curl "http://laravel.dev//api/resource/{name}" \
+-H "Accept: application/json"
 ```
 
 ```javascript
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://laravel.dev//api/user/all",
+    "url": "http://laravel.dev//api/resource/{name}",
     "method": "GET",
-    "data": {
-        "size": 1206263286,
-        "page": 1206263286,
-        "sort": "asc",
-        "end_time": "1996-07-30"
-},
         "headers": {
     "accept": "application/json"
     }
@@ -203,19 +353,12 @@ null
 ```
 
 ### HTTP Request
-`GET /api/user/all`
+`GET /api/resource/{name}`
 
-`HEAD /api/user/all`
+`HEAD /api/resource/{name}`
 
-#### Parameters
 
-Parameter | Type | Status | Description
---------- | ------- | ------- | ------- | -----------
-    size | integer |  required  | Minimum: `1`
-    page | integer |  required  | Minimum: `1`
-    sort | string |  required  | `desc` or `asc`
-    end_time | date |  optional  | 
-
+#User
 ## me
 
 get me information
@@ -254,4 +397,44 @@ null
 
 `HEAD /api/user/me`
 
+
+## /api/user/modify-avatar
+
+> Example request:
+
+```bash
+curl "http://laravel.dev//api/user/modify-avatar" \
+-H "Accept: application/json" \
+    -d "avatar"="porro" \
+
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://laravel.dev//api/user/modify-avatar",
+    "method": "POST",
+    "data": {
+        "avatar": "porro"
+},
+        "headers": {
+    "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+console.log(response);
+});
+```
+
+
+### HTTP Request
+`POST /api/user/modify-avatar`
+
+#### Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    avatar | image |  required  | Must be an image (jpeg, png, bmp, gif, or svg)
 
